@@ -1,0 +1,20 @@
+body {
+	background: black;
+	font-family: monospace;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+h1 {
+	color: grey;
+	font-weight: lighter;
+	font-size: 90px;
+}
+
+#price {
+	color: green;
+}
