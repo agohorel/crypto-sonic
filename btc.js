@@ -1,5 +1,4 @@
 var price = document.querySelector("#price");
-var currentPrice = "";
 
 checkPrice();
 
@@ -8,18 +7,25 @@ setInterval(function(){
 }, 60000);
 
 function checkPrice(){
-	var XHR = new XMLHttpRequest();
-	
-	XHR.onreadystatechange = function() {
-		if(XHR.readyState == 4 && XHR.status == 200){
-			var data = JSON.parse(XHR.responseText);
-			var currentPrice = data.bpi.USD.rate; 
+	var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+
+	fetch(url)
+		.then(handleErrors)
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			var currentPrice = data.bpi.USD.rate;
 			price.innerHTML = `$${currentPrice} (USD)`;
-		}
+		})
+		.catch(function(error){
+			console.log(error);
+		});
+}
+
+function handleErrors(request){
+	if(!request.ok){
+		throw Error(request.status);
 	}
-
-	XHR.open("GET", "https://api.coindesk.com/v1/bpi/currentprice.json");
-	XHR.send();
-
-	return currentPrice;
+	return request;
 }
