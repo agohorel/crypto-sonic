@@ -1,4 +1,6 @@
-var price = document.querySelector("#price");
+var btcPrice = document.querySelector("#btcPrice");
+var ethPrice = document.querySelector("#ethPrice");
+var ltcPrice = document.querySelector("#ltcPrice");
 
 checkPrice();
 
@@ -7,7 +9,7 @@ setInterval(function(){
 }, 60000);
 
 function checkPrice(){
-	var url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
+	var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD";
 
 	fetch(url)
 		.then(handleErrors)
@@ -29,8 +31,14 @@ function parseJSON(response){
 }
 
 function updatePrices(data){
-	var currentPrice = data.USD;
-	price.innerHTML = `$${currentPrice} (USD)`;
+	var currentBTCPrice = data.BTC.USD;
+	btcPrice.innerHTML = `$${currentBTCPrice} (USD)`;
+
+	var currentETHPrice = data.ETH.USD;
+	ethPrice.innerHTML = `$${currentETHPrice} (USD)`;
+
+	var currentLTCPrice = data.LTC.USD;
+	ltcPrice.innerHTML = `$${currentLTCPrice} (USD)`;
 }
 
 function logErrors(error){
