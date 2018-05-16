@@ -7,25 +7,33 @@ setInterval(function(){
 }, 60000);
 
 function checkPrice(){
-	var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+	var url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
 
 	fetch(url)
 		.then(handleErrors)
-		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			var currentPrice = data.bpi.USD.rate;
-			price.innerHTML = `$${currentPrice} (USD)`;
-		})
-		.catch(function(error){
-			console.log(error);
-		});
+		.then(parseJSON)
+		.then(updatePrices)
+		.catch(logErrors);
 }
 
 function handleErrors(request){
+	console.log(request);
 	if(!request.ok){
 		throw Error(request.status);
 	}
 	return request;
+}
+
+function parseJSON(response){
+	return response.json();
+}
+
+function updatePrices(data){
+	var currentPrice = data.USD;
+	price.innerHTML = `$${currentPrice} (USD)`;
+}
+
+function logErrors(error){
+	console.log(error);
+	console.dir(error);
 }
