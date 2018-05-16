@@ -6,7 +6,7 @@ checkPrice();
 
 setInterval(function(){
 	checkPrice();
-}, 60000);
+}, 1000);
 
 function checkPrice(){
 	var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD";
@@ -19,7 +19,6 @@ function checkPrice(){
 }
 
 function handleErrors(request){
-	console.log(request);
 	if(!request.ok){
 		throw Error(request.status);
 	}
