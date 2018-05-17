@@ -1,6 +1,9 @@
 var btcPrice = document.querySelector("#btcPrice");
 var ethPrice = document.querySelector("#ethPrice");
 var ltcPrice = document.querySelector("#ltcPrice");
+var btcArrow = document.querySelector("#btcArrow");
+var ethArrow = document.querySelector("#ethArrow");
+var ltcArrow = document.querySelector("#ltcArrow");
 
 checkPrice();
 
@@ -48,12 +51,16 @@ function updateBTC(data){
 	
 	if (currentBTCPrice > lastBTCPrice && updatePricesHasRun === true){
 		btcPrice.style.color = "green";
+		btcArrow.classList.remove("fas", "fa-angle-down");
+		btcArrow.classList.add("fas", "fa-angle-up");
 		console.log("############ BTC TURNED GREEN!!! ############");
 		console.log(currentBTCPrice - lastBTCPrice);
 	} 
 
 	else if (currentBTCPrice < lastBTCPrice && updatePricesHasRun === true) {
 		btcPrice.style.color = "red";
+		btcArrow.classList.remove("fas", "fa-angle-up");
+		btcArrow.classList.add("fas", "fa-angle-down");
 		console.log("############ BTC TURNED RED!!! ############");
 		console.log(currentBTCPrice - lastBTCPrice);
 	}
@@ -67,12 +74,16 @@ function updateETH(data){
 
 	if (currentETHPrice > lastETHPrice && updatePricesHasRun === true){
 		ethPrice.style.color = "green";
+		ethArrow.classList.remove("fas", "fa-angle-down");
+		ethArrow.classList.add("fas", "fa-angle-up");
 		console.log("############ ETH TURNED GREEN!!! ############");
 		console.log(currentETHPrice - lastETHPrice);
 	} 
 
 	else if (currentETHPrice < lastETHPrice && updatePricesHasRun === true) {
 		ethPrice.style.color = "red";
+		ethArrow.classList.remove("fas", "fa-angle-up");
+		ethArrow.classList.add("fas", "fa-angle-down");
 		console.log("############ ETH TURNED RED!!! ############");
 		console.log(currentETHPrice - lastETHPrice);
 	}
@@ -86,12 +97,16 @@ function updateLTC(data){
 
 	if (currentLTCPrice > lastLTCPrice && updatePricesHasRun === true){
 		ltcPrice.style.color = "green";
+		ltcArrow.classList.remove("fas", "fa-angle-down");
+		ltcArrow.classList.add("fas", "fa-angle-up");
 		console.log("############ LTC TURNED GREEN!!! ############");
 		console.log(currentLTCPrice - lastLTCPrice);
 	} 
 
 	else if (currentLTCPrice < lastLTCPrice && updatePricesHasRun === true) {
 		ltcPrice.style.color = "red";
+		ltcArrow.classList.remove("fas", "fa-angle-up");
+		ltcArrow.classList.add("fas", "fa-angle-down");
 		console.log("############ LTC TURNED RED!!! ############");
 		console.log(currentLTCPrice - lastLTCPrice);
 	}
