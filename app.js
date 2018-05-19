@@ -64,6 +64,7 @@ function updatePrices(data){
 
 function updateBTC(data){
 	var currentBTCPrice = data.BTC.USD;
+	btcPrice.innerHTML = `$${currentBTCPrice.toLocaleString()}`;
 	
 	if (currentBTCPrice > lastBTCPrice && updatePricesHasRun){
 		btcPrice.style.color = "green";
@@ -82,6 +83,7 @@ function updateBTC(data){
 
 function updateETH(data){
 	var currentETHPrice = data.ETH.USD;
+	ethPrice.innerHTML = `$${currentETHPrice.toLocaleString()}`;
 
 	if (currentETHPrice > lastETHPrice && updatePricesHasRun){
 		ethPrice.style.color = "green";
@@ -100,6 +102,7 @@ function updateETH(data){
 
 function updateLTC(data){
 	var currentLTCPrice = data.LTC.USD;
+	ltcPrice.innerHTML = `$${currentLTCPrice.toLocaleString()}`;
 
 	if (currentLTCPrice > lastLTCPrice && updatePricesHasRun){
 		ltcPrice.style.color = "green";
