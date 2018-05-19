@@ -118,3 +118,24 @@ function logErrors(error){
 	console.log(error);
 	console.dir(error);
 }
+
+// ######### BEGIN P5 STUFF #########
+
+function setup(){
+	canvas = createCanvas(windowWidth, windowHeight);
+	centerCanvas();
+}
+
+// resize canvas if window is resized
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+	centerCanvas();
+	background(0);
+}
+
+// re-center canvas if the window is resized
+function centerCanvas() {
+	var x = (windowWidth - width) / 2;
+	var y = (windowHeight - height) / 2;
+	canvas.position(x, y);
+}
