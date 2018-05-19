@@ -139,3 +139,11 @@ function centerCanvas() {
 	var y = (windowHeight - height) / 2;
 	canvas.position(x, y);
 }
+
+function draw(){
+	// resume audio context to satisfy recent chrome policy 
+	// https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
+	if (mouseIsPressed) {
+		getAudioContext().resume();
+	}
+}
