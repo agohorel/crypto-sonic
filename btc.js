@@ -1,15 +1,32 @@
 var btcPrice = document.querySelector("#btcPrice");
 var ethPrice = document.querySelector("#ethPrice");
 var ltcPrice = document.querySelector("#ltcPrice");
+
 var btcArrow = document.querySelector("#btcArrow");
 var ethArrow = document.querySelector("#ethArrow");
 var ltcArrow = document.querySelector("#ltcArrow");
 
+var toggle = document.querySelector("#toggle");
+
+// immediately check price so we have something to display
 checkPrice();
 
+toggle.addEventListener("click", function(){
+	if (toggle.value === "on") {
+		toggle.value = "off";
+		toggle.innerText = toggle.value;
+	} else {
+		toggle.value = "on";
+		toggle.innerText = toggle.value;
+	}
+});
+
 setInterval(function(){
-	checkPrice();
+	if (toggle.value === "on") {
+		checkPrice();
+	}
 }, 5000);
+
 
 function checkPrice(){
 	var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD";
