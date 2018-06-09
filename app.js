@@ -15,9 +15,11 @@ toggle.addEventListener("click", function(){
 	if (toggle.value === "on") {
 		toggle.value = "off";
 		toggle.innerText = toggle.value;
+		osc.stop();
 	} else {
 		toggle.value = "on";
 		toggle.innerText = toggle.value;
+		osc.start();
 	}
 });
 
@@ -53,6 +55,7 @@ var updatePricesHasRun = false;
 var lastBTCPrice = "";
 var lastETHPrice = "";
 var lastLTCPrice = "";
+var btcDiff = 0;
 
 function updatePrices(data){
 	updateBTC(data);
@@ -75,7 +78,11 @@ function updateBTC(data){
 	else if (currentBTCPrice < lastBTCPrice && updatePricesHasRun) {
 		btcPrice.style.color = "red";
 		btcArrow.classList.remove("fas", "fa-angle-up");
-		btcArrow.classList.add("fas", "fa-angle-down");
+		btcArrow.classList.add("fas", "fa-angle-down");		
+	}
+
+	if (updatePricesHasRun){
+		btcDiff = map(lastBTCPrice - currentBTCPrice, -100, 100, 200, 500);
 	}
 
 	lastBTCPrice = currentBTCPrice;
@@ -126,9 +133,14 @@ function logErrors(error){
 
 // ######### BEGIN P5 STUFF #########
 
+var osc;
+var pitch = 0;
+
 function setup(){
 	canvas = createCanvas(windowWidth, windowHeight);
 	centerCanvas();
+	osc = new p5.Oscillator();
+	osc.setType("sine");
 }
 
 // resize canvas if window is resized
@@ -151,4 +163,8 @@ function draw(){
 	if (mouseIsPressed) {
 		getAudioContext().resume();
 	}
+
+	pitch = lerp(pitch, btcDiff, 0.01);
+	osc.freq(pitch);
+	print(btcDiff, pitch);
 }
